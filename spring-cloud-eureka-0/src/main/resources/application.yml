@@ -1,0 +1,53 @@
+server:
+  port: 1310
+  servlet:
+    context-path: /eureka #访问路径
+
+eureka:
+#  server:
+#    enable-self-preservation: false #禁用自我保护机制,不推荐
+  instance:
+    hostname: eureka0   #eurekade的主机名
+    instance-id: eureka-0  #作为eureka页面上的超连接的名称
+    prefer-ip-address: true  #访问路径显示ip
+  client:
+    register-with-eureka: true  #单机设false 不注册自身
+    fetch-registry: true   #单机设false 不从eureka上获取注册信息
+    service-url:
+      defaultZone: http://springcloud.eureka1:1311/eureka/eureka/,http://springcloud.eureka2:1312/eureka/eureka/
+      #服务注册地址,注意这里必须以/eureka/结束; 如果有项目路径,路径后也要加上; 配置其他erueka
+
+spring:
+  application:
+    name: springcloud-eureka #会作为eureka组件的服务名,集群模式下名称要一致
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.ciel.cl:1601/ssh-data?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ciel
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+    show-sql: true
+    database: mysql
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  redis:
+    host: redis.ciel.cl
+    port: 6379
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /manager
+
+info:
+  app.name: xiapeixin0

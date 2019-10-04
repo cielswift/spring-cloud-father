@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-api/spring-cloud-api.iml" filepath="$PROJECT_DIR$/spring-cloud-api/spring-cloud-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-common/spring-cloud-common.iml" filepath="$PROJECT_DIR$/spring-cloud-common/spring-cloud-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consumer-0/spring-cloud-consumer-0.iml" filepath="$PROJECT_DIR$/spring-cloud-consumer-0/spring-cloud-consumer-0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-entity/spring-cloud-entity.iml" filepath="$PROJECT_DIR$/spring-cloud-entity/spring-cloud-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-eureka-0/spring-cloud-eureka-0.iml" filepath="$PROJECT_DIR$/spring-cloud-eureka-0/spring-cloud-eureka-0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-eureka-1/spring-cloud-eureka-1.iml" filepath="$PROJECT_DIR$/spring-cloud-eureka-1/spring-cloud-eureka-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-eureka-2/spring-cloud-eureka-2.iml" filepath="$PROJECT_DIR$/spring-cloud-eureka-2/spring-cloud-eureka-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father.iml" filepath="$PROJECT_DIR$/spring-cloud-father.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-provider-0/spring-cloud-provider-0.iml" filepath="$PROJECT_DIR$/spring-cloud-provider-0/spring-cloud-provider-0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-provider-1/spring-cloud-provider-1.iml" filepath="$PROJECT_DIR$/spring-cloud-provider-1/spring-cloud-provider-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-zuul/spring-cloud-zuul.iml" filepath="$PROJECT_DIR$/spring-cloud-zuul/spring-cloud-zuul.iml" />
+    </modules>
+  </component>
+</project>

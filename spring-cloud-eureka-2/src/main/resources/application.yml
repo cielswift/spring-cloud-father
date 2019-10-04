@@ -1,0 +1,50 @@
+server:
+  port: 1312
+  servlet:
+    context-path: /eureka
+
+eureka:
+  instance:
+    hostname: eureka2 #eurekade的主机名
+    instance-id: eureka-2
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true  #单机设false 不注册自身
+    fetch-registry: true        #单机设false 不从eureka上获取注册信息
+    service-url:
+      defaultZone: http://springcloud.eureka0:1310/eureka/eureka/,http://springcloud.eureka1:1311/eureka/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /manager
+
+spring:
+  application:
+    name: springcloud-eureka
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.ciel.cl:1601/ssh-data?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ciel
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+    show-sql: true
+    database: mysql
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  redis:
+    host: redis.ciel.cl
+    port: 6379
+
+info:
+  app.name: xiapeixin2
+
