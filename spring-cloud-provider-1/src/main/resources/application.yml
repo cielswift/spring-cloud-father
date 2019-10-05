@@ -9,13 +9,17 @@ eureka:
     instance-id: provider-1-hystrix  #服务熔断
   client:
     service-url:
-      defaultZone: http://springcloud.eureka0:1310/eureka/eureka/,http://springcloud.eureka1:1311/eureka/eureka/,http://springcloud.eureka2:1312/eureka/eureka/
+      defaultZone: http://xia:123@springcloud.eureka0:1310/eureka/eureka/,http://xia:123@springcloud.eureka1:1311/eureka/eureka/,http://xia:123@springcloud.eureka2:1312/eureka/eureka/
 
 
 
 spring:
   application:
     name: springcloud-provider #提供相同服务的两个微服务,名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
   servlet:
     multipart:
       max-file-size: 1MB

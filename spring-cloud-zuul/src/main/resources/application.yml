@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 1710
   servlet:
     context-path: /zuul
 
@@ -9,7 +9,7 @@ eureka:
     instance-id: zuul-0-hystrix  #服务熔断
   client:
     service-url:
-      defaultZone: http://springcloud.eureka0:1310/eureka/eureka/,http://springcloud.eureka1:1311/eureka/eureka/,http://springcloud.eureka2:1312/eureka/eureka/
+      defaultZone: http://xia:123@springcloud.eureka0:1310/eureka/eureka/,http://xia:123@springcloud.eureka1:1311/eureka/eureka/,http://xia:123@springcloud.eureka2:1312/eureka/eureka/
 
 zuul:
   routes:
@@ -25,6 +25,11 @@ zuul:
 spring:
   application:
     name: springcloud-zuul
+  security:
+    user:
+      name: xia
+      password: 123
+
   servlet:
     multipart:
       max-file-size: 1MB
@@ -76,7 +81,14 @@ spring:
     host: smtp.163.com
   aop:
     proxy-target-class: true #使用cglib代理
-
+  cloud:
+    config:
+      name: springcloud-provider
+      server:
+        git:
+          uri: https://github.com/cielswift/spring-cloud-config.git #远程配置,也可以写其他服务的地址,比如http://127.0.0.1:1310/eureka/,通过springcloudconfig获取其他服务的地址
+      profile:
+      label: master
 ---
 spring:
   profiles: dev #dev模式

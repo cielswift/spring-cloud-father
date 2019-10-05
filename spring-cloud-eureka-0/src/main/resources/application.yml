@@ -14,12 +14,18 @@ eureka:
     register-with-eureka: true  #单机设false 不注册自身
     fetch-registry: true   #单机设false 不从eureka上获取注册信息
     service-url:
-      defaultZone: http://springcloud.eureka1:1311/eureka/eureka/,http://springcloud.eureka2:1312/eureka/eureka/
+      defaultZone: http://xia:123@springcloud.eureka1:1311/eureka/eureka/,http://xia:123@springcloud.eureka2:1312/eureka/eureka/
       #服务注册地址,注意这里必须以/eureka/结束; 如果有项目路径,路径后也要加上; 配置其他erueka
+  server:
+    eviction-interval-timer-in-ms: 6000 #清理间隔
 
 spring:
   application:
     name: springcloud-eureka #会作为eureka组件的服务名,集群模式下名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql.ciel.cl:1601/ssh-data?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
