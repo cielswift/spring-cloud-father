@@ -11,6 +11,7 @@
         <module name="spring-cloud-eureka-2" />
         <module name="spring-cloud-eureka-1" />
         <module name="spring-cloud-eureka-0" />
+        <module name="spring-cloud-asso" />
         <module name="spring-cloud-common" />
         <module name="spring-cloud-zuul" />
         <module name="spring-cloud-entity" />
@@ -21,6 +22,7 @@
     <bytecodeTargetLevel>
       <module name="common" target="12" />
       <module name="spring-cloud-api" target="12" />
+      <module name="spring-cloud-asso" target="12" />
       <module name="spring-cloud-common" target="12" />
       <module name="spring-cloud-consumer-0" target="12" />
       <module name="spring-cloud-entity" target="12" />
@@ -38,6 +40,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="spring-cloud-api" options="-parameters" />
+      <module name="spring-cloud-asso" options="-parameters" />
       <module name="spring-cloud-common" options="-parameters" />
       <module name="spring-cloud-consumer-0" options="-parameters" />
       <module name="spring-cloud-entity" options="-parameters" />

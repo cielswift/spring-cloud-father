@@ -1,0 +1,86 @@
+server:
+  port: 1810
+  servlet:
+    context-path: /asso
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: asso-hystrix
+  client:
+    service-url:
+      defaultZone: http://xia:123@springcloud.eureka0:1310/eureka/eureka/,http://xia:123@springcloud.eureka1:1311/eureka/eureka/,http://xia:123@springcloud.eureka2:1312/eureka/eureka/
+      #服务注册地址
+
+spring:
+  application:
+    name: springcloud-asso #会作为eureka组件的服务名,提供相同服务的两个微服务名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/ #配置静态资源路径,隔开多个
+  thymeleaf:
+    prefix: classpath:/templates/  #模板路径
+    suffix: .html
+    mode: html5
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+  profiles:
+    active: dev #激活dev模式
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.ciel.cl:1601/ssh-data?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ciel
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+    show-sql: true
+    database: mysql
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  rabbitmq:
+    host: 127.0.0.1 #rabbitMQ
+    port: 5672
+    username: ciel
+    password: c
+    virtual-host: /
+  redis:
+    host: redis.ciel.cl
+    port: 6379
+  mail:
+    username: 15966504931@163.com #邮箱账户
+    password: xiapeixin7 #授权码
+    host: smtp.163.com
+  aop:
+    proxy-target-class: true #使用cglib代理
+---
+spring:
+  profiles: dev #dev模式
+logging:
+  config: classpath:logback-spring.xml
+
+fileUpload:
+  img:
+    user: C:/CustomSoftware/Nginx-Cluster/nginx-1.16.1/static/img/user/
+fileRequest:
+  img:
+    user: http://nginx.ciel.cl/img/user/
+
+
