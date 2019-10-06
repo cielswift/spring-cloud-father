@@ -22,7 +22,8 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @JsonIgnoreProperties(value = {"user"}) //不序列化AppEntity的user属性,防止溢出
-    @OneToMany(mappedBy = "user",fetch =FetchType.LAZY) //mappedBy对方维护关联关系
+    @OneToMany(mappedBy = "user",fetch =FetchType.LAZY,cascade = {CascadeType.REMOVE})
+    //mappedBy对方维护关联关系, cascade级联删除,删除多端的所有数据
     @OrderBy("createDate ASC")
     private List<AppEntity> apps = new ArrayList<>();
 
@@ -39,8 +40,10 @@ public class UserEntity extends BaseEntity {
     @JsonIgnoreProperties(value = {"users"})  //不序列化LanguageEntity的users属性,防止溢出
     @OrderBy("createDate ASC")
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="ssh_user_lanhuager",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="language_id"))
-    //joinColumns 此表在中间表中对应的外键 ; inverseJoinColumns 另一个表对应的中间表的外键;
+    @JoinTable(name="ssh_user_lanhuager",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="language_id",referencedColumnName = "id"))
+    //joinColumns 此表在中间表中对应的外键 ; referencedColumnName这个外键指向本表(或对应表)的主键,不写也可以
+    // inverseJoinColumns 另一个表对应的中间表的外键;
     List<LanguageEntity> langs = new ArrayList<>();
 
 }

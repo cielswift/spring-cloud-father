@@ -20,6 +20,6 @@ public class LanguageEntity extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "langs") //mappedBy 是Person的jobs属性,(不是表字段);这个集合放什么, 对方维护
+    @ManyToMany(mappedBy = "langs") //mappedBy 是Person的langs属性,(不是表字段);对方维护
     private List<UserEntity> users = new ArrayList<>();
 }
