@@ -18,4 +18,8 @@ public interface UserService  {
     @RequestMapping("/getByWapper")
     public List<UserEntity> getByWapper() throws JsonProcessingException;
 
+
+    UserEntity findByName(String userName);
+
+    UserEntity save(UserEntity userEntity);
 }

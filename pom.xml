@@ -33,7 +33,6 @@
     <properties>
         <java.version>12</java.version>
     </properties>
-
     <dependencies>
 
         <dependency> <!--单点登录-->

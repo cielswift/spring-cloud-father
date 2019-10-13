@@ -25,6 +25,7 @@ public class AppEntity  extends BaseEntity{
     private String nun;
 
     @Temporal(TemporalType.TIMESTAMP) //日期类型指定精确的时间
+    @Transient
     private Date nda;
 
 }

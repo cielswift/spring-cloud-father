@@ -49,4 +49,14 @@ public class UserServiceImpl implements UserService {
 
         return all;
     }
+
+    @Override
+    public UserEntity findByName(String userName) {
+        return userDao.findByName(userName);
+    }
+
+    @Override
+    public UserEntity save(UserEntity userEntity) {
+        return userDao.save(userEntity);
+    }
 }

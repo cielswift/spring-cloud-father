@@ -20,6 +20,16 @@ public class UserServiceFullbackImpl implements FallbackFactory<UserService> {
            public List<UserEntity> getByWapper() throws JsonProcessingException {
                return null;
            }
+
+           @Override
+           public UserEntity findByName(String userName) {
+               return null;
+           }
+
+           @Override
+           public UserEntity save(UserEntity userEntity) {
+               return null;
+           }
        };
     }
 }

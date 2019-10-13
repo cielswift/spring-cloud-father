@@ -36,14 +36,21 @@ public class UserEntity extends BaseEntity {
     @Column(name = "head_Sculpture_path")
     private String headSculpturePath;
 
-
     @JsonIgnoreProperties(value = {"users"})  //不序列化LanguageEntity的users属性,防止溢出
-    @OrderBy("createDate ASC")
+    @OrderBy("createDate desc")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="ssh_user_lanhuager",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name="language_id",referencedColumnName = "id"))
     //joinColumns 此表在中间表中对应的外键 ; referencedColumnName这个外键指向本表(或对应表)的主键,不写也可以
     // inverseJoinColumns 另一个表对应的中间表的外键;
     List<LanguageEntity> langs = new ArrayList<>();
+
+
+    @JsonIgnoreProperties(value = {"users"})  //不序列化LanguageEntity的users属性,防止溢出
+    @OrderBy("createDate desc")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="ssh_user_role",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="role_id",referencedColumnName = "id"))
+    List<RoleEntity> roles = new ArrayList<>();
 
 }
