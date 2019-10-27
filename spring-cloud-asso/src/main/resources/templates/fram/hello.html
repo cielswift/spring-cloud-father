@@ -8,11 +8,13 @@
 <div class="panelBar" th:include="fram/head::head"></div>
 <body>
 
+
 登陆账号: <span sec:authentication="name"></span><br>
 主体中获取的登陆账号: <span sec:authentication="principal.username"></span><br>
 凭证: <span sec:authentication="credentials"></span><br>
 权限和角色: <span sec:authentication="authorities"></span><br>
 客户端ip: <span sec:authentication="details.remoteAddress"></span><br>
+
 
 <!--name：登录账号名称-->
 <!-- principal：登录主体，在自定义登录逻辑中是UserDetails-->

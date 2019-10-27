@@ -2,18 +2,22 @@ package com.ciel.springcloudasso.controller;
 
 import com.ciel.entity.UserEntity;
 import com.ciel.service.UserService;
+import com.ciel.springcloudasso.service.GetCussLoginUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RestController
 @SessionAttributes("user")
@@ -21,6 +25,9 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GetCussLoginUser getCussLoginUser;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -42,6 +49,7 @@ public class IndexController {
         }else{
             return "defeat";
         }
+
     }
 
     @RequestMapping("/defeat")
@@ -89,16 +97,40 @@ public class IndexController {
         return "i like you";
     }
 
-    @PreAuthorize("@myServiceImpl.hasPermission(request,authentication)")
-    //表示访问方法或类在执行之前先判断权限,参数和access()方法参数取值相同，都是权限表达式。
+
+    @PreAuthorize("@myServiceImpl.hasPermission(#request,#authentication)")
     @RequestMapping("/test1")
-    public String test1(HttpServletRequest request) {
+    //表示访问方法或类在执行之前先判断权限,参数和access()方法参数取值相同，都是权限表达式。
+    //自定义判断必须返回true或false; 在注解上需要加#获取请求参数, 配置中和页面上不用;
+
+    //比如@PreAuthorize("principal.username.equals(#username)") 限制只能查询自己的信息
+
+//    使用@PreFilter和@PostFilter可以对集合类型的(参数)或(返回值)进行过滤。使用@PreFilter和@PostFilter时，
+//    Spring Security将移除使对应表达式的结果为false的元素。
+
+    //@PostFilter("filterObject.id%2==0"） //过滤返回结果,返回结果是一个集合 ;filterObject表示集合的当前对象
+    //@PreFilter(filterTarget="ids", value="filterObject%2==0") //对参数进行过滤,参数是一个集合,参数名叫ids;
+
+    public String test1(HttpServletRequest request,Authentication authentication) {
         return "test1";
     }
 
+
+
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/test2")
-    public String test2() {
+    public String test2(Principal principal, Authentication authentication,HttpServletRequest request) {
+//获取当前登录用户信息; 的三种方式
+        String name = principal.getName();
+        String name1 = authentication.getName();
+        Principal userPrincipal = request.getUserPrincipal();
+
+
+        User o = getCussLoginUser.getloginUser(); //获取当前登录用户
+
+        getCussLoginUser.getloginAuthentication();
+
         return "test2";
     }
 

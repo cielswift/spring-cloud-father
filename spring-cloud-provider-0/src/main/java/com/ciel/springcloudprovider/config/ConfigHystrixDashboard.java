@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class ConfigHystrixDashboard {
 
     @Bean
-    public ServletRegistrationBean getServlet() {
+    public ServletRegistrationBean getServlet() { //注册服务高可用
 
         HystrixMetricsStreamServlet streamServlet =new HystrixMetricsStreamServlet();
 

@@ -19,19 +19,10 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 //prePostEnabled 开启SpringSecurity访问控制的注解 ; securedEnabled
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private MyAuthenticationProvider provider;// 自定义的AuthenticationProvider
-
-
     //当进行登录时会执行 UsernamePasswordAuthenticationFilter 过滤器。
 
-
-    private MyAccessDeniedHandler myAccessDeniedHandler; //自定义403页面
-
     @Autowired
-    public void setMyAccessDeniedHandler(MyAccessDeniedHandler myAccessDeniedHandler) {
-        this.myAccessDeniedHandler = myAccessDeniedHandler;
-    }
+    private MyAccessDeniedHandler myAccessDeniedHandler; //自定义403页面
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -42,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Primary
     public PasswordEncoder myPasswordEncoder(){
         return new MyPasswordEncoder();
-    }
+    } //加密
 
     @Autowired
     private PersistentTokenRepository repository; //记住我
@@ -157,17 +148,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.authenticationProvider(provider);
-        auth.userDetailsService(userDetailsService());
+
+        auth.userDetailsService(userDetailsService);
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager iud = new InMemoryUserDetailsManager();
-//        Collection<GrantedAuthority> adminAuth = new ArrayList<>();
-//        adminAuth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//        iud.createUser(new User("zhangsan", "123456", adminAuth));
-//        return iud;
-        return userDetailsService;
-    }
 
 }
