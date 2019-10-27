@@ -2,11 +2,7 @@ server:
   port: 1510
   servlet:
     context-path: /consumer0
-#  ssl:
-#    key-store: classpath:key.cer
-#    key-store-type: JKS
-#    key-alias: xiapeixin
-#    key-password: cielswift
+
 eureka:
   instance:
     prefer-ip-address: true #使用ip注册

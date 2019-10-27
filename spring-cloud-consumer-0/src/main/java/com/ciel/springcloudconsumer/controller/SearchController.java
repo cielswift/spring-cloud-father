@@ -4,7 +4,9 @@ import com.ciel.entity.AppEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +24,7 @@ public class SearchController {
 
     @RequestMapping("/an") //轮询负载均衡
     public String list(){
+
         String forObject = restTemplate.getForObject
                 ("http://SPRINGCLOUD-PROVIDER/provider/app/getAll",String.class);
         return forObject;

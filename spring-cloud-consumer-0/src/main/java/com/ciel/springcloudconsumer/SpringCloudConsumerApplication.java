@@ -3,9 +3,7 @@ package com.ciel.springcloudconsumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
@@ -15,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"com.ciel.entity","com.ciel.service","com.ciel.springcloudconsumer"})
 
-@EnableFeignClients(basePackages = "com.ciel.service")  //开启Feign负载均衡
+//@EnableFeignClients(basePackages = "com.ciel.service")  //开启Feign负载均衡
 
 @EnableHystrixDashboard //服务监控界面
 public class SpringCloudConsumerApplication {

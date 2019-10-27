@@ -1,15 +1,16 @@
 package com.ciel.springcloudconsumer.config;
 
-import com.netflix.loadbalancer.*;
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.RetryRule;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
+import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class RestConfig {
@@ -20,6 +21,9 @@ public class RestConfig {
     @LoadBalanced() //启用负载均衡机制
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors()
+                .add(new BasicAuthenticationInterceptor("xia", "123", StandardCharsets.UTF_8));
+
         return restTemplate;
     }
 
