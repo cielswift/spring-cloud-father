@@ -6,7 +6,7 @@
 
     <script src="http://nginx.ciel.cl/js/vue.js"></script>
     <script src="http://nginx.ciel.cl/js/vue-resource.js"></script>
-    <link href="http://nginx.ciel.cl/css/bootstrap.css" rel="stylesheet" />
+    <link href="http://nginx.ciel.cl/css/bootstrap.css" rel="stylesheet"/>
     <script type="text/javascript" src="http://nginx.ciel.cl/js/wangEditor.js"></script>
     <link rel="stylesheet" src="http://nginx.ciel.cl/js/wangEditor.css"/>
 
@@ -14,20 +14,32 @@
 <div class="panelBar" th:include="fram/head::head"></div>
 <body>
 
+<th:block th:if="${msg != null}">
+    <div class="text-danger" th:text="${msg}"></div>
+</th:block>
 <form th:action="@{/log}" method="post" class="form-inline">
+
+    <input type="hidden" th:value="${_csrf.token}" name="_csrf" th:if="${_csrf}"/>
+
 
     <div class="form-group">
         <label for="exampleInputEmail1">userName</label>
-        <input type="text"  name="username" class="form-control" id="exampleInputEmail1" placeholder="userName">
+        <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="userName">
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
 
+    记住我:<input type="checkbox" name="remember-me" value="true"/>
+
     <div class="text-center">
-        <button type="submit" class="btn btn-success">Submit</button></div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
 </form>
+
+<div>默认情况下表单name属性必须为username和password。</div>
+
 <div id="div1">
     <p></p>
 </div>

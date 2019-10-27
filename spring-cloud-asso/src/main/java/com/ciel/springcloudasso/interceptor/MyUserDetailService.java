@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,7 @@ public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserEntity byName = userDao.findByName(userName);
@@ -29,13 +29,22 @@ public class MyUserDetailService implements UserDetailsService {
         if(byName !=null) {
             List<RoleEntity> roles = byName.getRoles();
             List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
+
             roles.forEach(t -> authorities.add(new SimpleGrantedAuthority(t.getName())));
+            authorities.add(new SimpleGrantedAuthority("ROLE_BOSS"));
+            //List<GrantedAuthority> admin = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
 
             return new User(userName, byName.getPassword(), authorities);
         }else{
-            return null;
+            throw new UsernameNotFoundException("找不到此用户");
         }
 
     }
+    //默认情况下表单name属性必须为username和password。
+
+//    isAccountNonExpired() 是否过期
+//    isAccountNonLocked() 是否锁定
+//    isCredentialsNonExpired() 凭据是否过期
+//    isEnabled() 是否可用
 
 }

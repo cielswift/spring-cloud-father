@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title> hello </title>
+</head>
+<div class="panelBar" th:include="fram/head::head"></div>
+<body>
+
+登陆账号: <span sec:authentication="name"></span><br>
+主体中获取的登陆账号: <span sec:authentication="principal.username"></span><br>
+凭证: <span sec:authentication="credentials"></span><br>
+权限和角色: <span sec:authentication="authorities"></span><br>
+客户端ip: <span sec:authentication="details.remoteAddress"></span><br>
+
+<!--name：登录账号名称-->
+<!-- principal：登录主体，在自定义登录逻辑中是UserDetails-->
+<!-- credentials：凭证-->
+<!-- authorities：权限和角色-->
+<!-- details：实际上是WebAuthenticationDetails 的实例。可以获取remoteAddress(客户端ip)和sessionId(当前sessionId)-->
+
+
+<table class="table">
+
+    通过权限判断
+    <button class="btn-warning" sec:authorize="hasAuthority('ADMIN')">新增</button>
+    <button class="btn-warning" sec:authorize="hasAnyAuthority('ADMIN','USER')">删除</button>
+    <br/>
+    通过角色判断：
+    <button class="btn-warning" sec:authorize="hasRole('ROLE_BOSS')">修改</button>
+    <button class="btn-warning" sec:authorize="hasAnyRole('ROLE_BOSS','ROLE_EMP')">查看</button>
+    自定义判断
+    <button class="btn-warning" sec:authorize="@myServiceImpl.hasPermission(request,authentication)">自定义</button>
+    ip判断
+    <button class="btn-warning" sec:authorize="hasIpAddress('127.0.0.1')">ip</button>
+
+
+</table>
+
+
+<div class="panelBar" th:replace="fram/foot::foot(xin='我是底部')"></div>
+
+</body>
+
+<script>
+
+
+</script>
+</html>
+
+
