@@ -32,4 +32,8 @@ public class GetCussLoginUser {
         return userDetails;
 
     }
+
+//    Authentication在认证请求时用到，也可在层次间传递。最常见的场景就是登录，登录中的name、password、permission，
+//    对于过来就是Authentication的Principal、Credentials、Authorities。
+
 }

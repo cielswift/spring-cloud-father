@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,10 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true) //认证失败报500
 //prePostEnabled 开启SpringSecurity访问控制的注解 ; securedEnabled
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AuthenticationProvider authenticationProvider; //自定义认证
+
 
     //当进行登录时会执行 UsernamePasswordAuthenticationFilter 过滤器。
 
@@ -41,9 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService; //自定义的登录逻辑
 
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.authenticationProvider(authenticationProvider);
+
+        auth.userDetailsService(userDetailsService);
+
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
 
         //表单认证
         http.formLogin()
@@ -142,15 +156,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //会自动清除RememberMe中在数据库中持久化的口令 ,如果需要的话需要重新登陆并勾选
 
     }
-
-
-
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.authenticationProvider(provider);
-
-        auth.userDetailsService(userDetailsService);
-    }
-
 
 }
