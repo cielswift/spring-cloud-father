@@ -37,12 +37,43 @@
     <p></p>
 </div>
 
+<hr size="20">
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+
 <div class="panelBar" th:replace="fram/foot::foot(xin='xiapeixin')">传参给其他页面</div>
 
 </body>
 
 <script>
+    var myChart = echarts.init(document.getElementById("main"));
 
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},  //提示框组件
+        legend: {              //图例组件
+            data:['销量',"产量"]     //图例的数据数组。数组项通常为一个字符串，每一项代表一个系列的 name
+        },
+        xAxis: {             //直角坐标系 grid 中的 x 轴
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子11"]
+        },
+        yAxis: {},
+        series: [{                //系列列表
+            name: '销量',         //系列名称，用于tooltip的显示，legend 的图例筛选
+            type: 'bar',          //类型
+            data: [50,60,10,20,30,11]          //系列中的数据内容数组。数组项通常为具体的数据项
+        },{                //系列列表
+            name: '产量',         //系列名称，用于tooltip的显示，legend 的图例筛选
+            type: 'bar',          //类型
+            data: [60,50,20,10,30,11]          //系列中的数据内容数组。数组项通常为具体的数据项
+        }]
+    };
+
+    myChart.setOption(option);
 
 </script>
 </html>

@@ -13,13 +13,15 @@ eureka:
 
 zuul:
   routes:
-    myprovider.serviceId: springcloud-provider  #zuul映射
-    myprovider.path: /provider-ss/**
-    myconsumer.serviceId: springcloud-consumer0
-    myconsumer.path: /consumer-ss-0/**
+    myprovider:
+      serviceId: springcloud-provider  #在eureka注册的真实服务的名称
+      path: /provider-ss/**  #对应的zuul的路由
+    myconsumer:
+      serviceId: springcloud-consumer0
+      path: /consumer-ss-0/**
   #ignored-services: springcloud-provider,springcloud-consumer0 #忽略真实名称 ,"*" 忽略所有的;
   ignored-services: "*"
-  prefix: /ciel  #前缀
+  #prefix: /ciel  #前缀
 
 
 spring:

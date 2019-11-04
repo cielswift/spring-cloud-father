@@ -23,13 +23,11 @@ public class JwtDemo {
 
         Algorithm algorithm = Algorithm.HMAC256("xia-pei#xin$202"); //密钥
 
-
         String token = JWT.create().withHeader(map)  //生成 头
                 /* 设置 载荷 Payload */
                 .withClaim("username", "ciel")
                 .withClaim("password", "123")
                 .withClaim("deptName", "技术部")
-
 
                 .withIssuer("SERVICE") // 签名是有谁生成 例如 服务器
                 .withSubject("this is test token")// 签名的主题
@@ -45,14 +43,11 @@ public class JwtDemo {
 
         Thread.sleep(1000 * 3);
 
-
-
         JWTVerifier verifier = JWT.require(algorithm) //验证
                 .withIssuer("SERVICE")
                 .build();
 
         DecodedJWT jwt = verifier.verify(token); //获取值
-
 
         String subject = jwt.getSubject();
 

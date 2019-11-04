@@ -27,7 +27,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
         UserDetails  user = userDetailsService.loadUserByUsername(username);
         if(user.getPassword().equals(password)) {
-            return new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         }
         return null;
     }

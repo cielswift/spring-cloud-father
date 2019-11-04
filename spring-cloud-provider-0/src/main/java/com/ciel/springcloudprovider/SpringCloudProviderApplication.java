@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "com.ciel.entity")
 @EnableJpaAuditing //开启自动填充
 
-//@EnableFeignClients(basePackages = "com.ciel.service")  //开启Feign负载均衡
+@EnableFeignClients(basePackages = "com.ciel.service")  //开启Feign负载均衡
 @EnableCircuitBreaker //开启对于hystris熔断的支持
 //@EnableHystrix
 @EnableHystrixDashboard //服务视图

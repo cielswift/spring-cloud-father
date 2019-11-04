@@ -3,11 +3,12 @@ package com.ciel.springcloudzuul;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
 @EnableZuulProxy  //开启路由
-
+@EnableEurekaClient
 @EnableConfigServer //集中配置
 public class SpringCloudZuulApplication {
 

@@ -1,11 +1,10 @@
 package com.ciel.springcloudcommon.service.impl;
 
-import com.ciel.springcloudcommon.dao.LangDao;
-import com.ciel.springcloudcommon.dao.UserDao;
-import com.ciel.entity.AppEntity;
 import com.ciel.entity.LanguageEntity;
 import com.ciel.entity.UserEntity;
 import com.ciel.service.UserService;
+import com.ciel.springcloudcommon.dao.LangDao;
+import com.ciel.springcloudcommon.dao.UserDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

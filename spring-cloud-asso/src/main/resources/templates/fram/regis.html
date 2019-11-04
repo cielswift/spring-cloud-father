@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> welcome </title>
 </head>
-<div class="panelBar" th:include="fram/head::head"></div>
+<div class="panelBar" th:include="fram/head::head(xin='aa')"></div>
 <body>
 
 <form th:action="@{/reg}" method="post">

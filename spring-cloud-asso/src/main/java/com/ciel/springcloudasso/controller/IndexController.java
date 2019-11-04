@@ -1,5 +1,6 @@
 package com.ciel.springcloudasso.controller;
 
+import com.ccc.outside.Xia;
 import com.ciel.entity.UserEntity;
 import com.ciel.service.UserService;
 import com.ciel.springcloudasso.service.GetCussLoginUser;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @RestController
-@SessionAttributes("user")
+@SessionAttributes("/user")
 public class IndexController {
 
     @Autowired
@@ -28,6 +29,9 @@ public class IndexController {
 
     @Autowired
     private GetCussLoginUser getCussLoginUser;
+
+    @Autowired
+    private Xia xia;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -159,4 +163,10 @@ public class IndexController {
     public String test8() {
         return "test8";
     }
+
+    @RequestMapping("/boot")
+    public ModelAndView boot(){
+        return new ModelAndView("fram/boot");
+    }
+
 }

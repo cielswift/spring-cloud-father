@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     //当进行登录时会执行 UsernamePasswordAuthenticationFilter 过滤器。
+    //然后BasicAuthenticationFilter, 不配置不生效
+    //然后 FilterSecurityInterceptor ,判断权限,没有会给ExceptionTranslationFilter 抛异常
 
     @Autowired
     private MyAccessDeniedHandler myAccessDeniedHandler; //自定义403页面
@@ -56,11 +58,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    // Authentication在认证请求时用到，也可在层次间传递。最常见的场景就是登录，登录中的name、password、permission，
+    //  对于过来就是Authentication的Principal、Credentials、Authorities。
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //http.addFilter(); //手动添加一个过滤器 ,(必须是spring提供的过滤器)
+        // 如果我们创建的Filter没有在预先设置的Map集合中，那么就会抛出一个IllegalArgumentException异常，
+        // 并提示我们使用addFilterBefore或者addFilterAfter
+
         //表单认证
-        http.formLogin()
+        http.formLogin()  // 设置表单登录，创建UsernamePasswordAuthenticationFilter拦截器 (FormLoginConfigurer)
                 .loginProcessingUrl("/log")			//设置登录请求url,需要执行UserDetailsServiceImpl
                 .loginPage("/login")				//设置自定义登录页面，使用绝对路径
 
@@ -74,8 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")         //自定义设置认证表单中用户名的name属性
                 .passwordParameter("password");        //自定义设置认证表单中密码的password属性
 
+
+        http.httpBasic(); // 开启HTTP Basic，创建BasicAuthenticationFilter拦截器 (HttpBasicConfigurer)
+
         //拦截: 相当于授权的过程
-        http.authorizeRequests()
+        http.authorizeRequests()  // 拦截请求，创建了FilterSecurityInterceptor拦截器; (ExpressionUrlAuthorizationConfigurer)
                 .antMatchers("/login","/regis","/reg").permitAll()
                 //请求登录页面的请求不需要认证。有人都可以访问登录页面,一定要配置/login,不然无线重定向;
 
