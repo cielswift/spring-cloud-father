@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @EnableWebSecurity //使配置生效
@@ -23,24 +24,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProvider authenticationProvider; //自定义认证
 
-
     //当进行登录时会执行 UsernamePasswordAuthenticationFilter 过滤器。
-    //然后BasicAuthenticationFilter, 不配置不生效
+    //然后 BasicAuthenticationFilter, 不配置不生效
     //然后 FilterSecurityInterceptor ,判断权限,没有会给ExceptionTranslationFilter 抛异常
 
     @Autowired
     private MyAccessDeniedHandler myAccessDeniedHandler; //自定义403页面
 
     @Bean
+    @Primary
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    } //spring提供的加密
 
     @Bean
-    @Primary
+
     public PasswordEncoder myPasswordEncoder(){
         return new MyPasswordEncoder();
-    } //加密
+    } //自定义加密
 
     @Autowired
     private PersistentTokenRepository repository; //记住我
@@ -48,6 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService; //自定义的登录逻辑
 
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler; //自定义成功处理器
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -77,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .failureForwardUrl("/defeat")   //认证失败后跳转的url,
 
        // 将登陆成功/ 失败跳转到对应的 url 的方法修改成登陆成功/ 失败后跳转到对应的 处理器类 的方法
-                .successHandler(new MyAuthenticationSuccessHandler())
+                .successHandler(authenticationSuccessHandler)
                 .failureHandler(new  MyFailHandler("/defeat"))
 
                 .usernameParameter("username")         //自定义设置认证表单中用户名的name属性

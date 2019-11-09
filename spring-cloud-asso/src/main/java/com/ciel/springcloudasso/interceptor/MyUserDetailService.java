@@ -21,7 +21,6 @@ public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserEntity byName = userDao.findByName(userName);

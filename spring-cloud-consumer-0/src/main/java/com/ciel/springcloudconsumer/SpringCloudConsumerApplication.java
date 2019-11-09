@@ -24,4 +24,5 @@ public class SpringCloudConsumerApplication {
         SpringApplication.run(SpringCloudConsumerApplication.class, args);
 
     }
+
 }

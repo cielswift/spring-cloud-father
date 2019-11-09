@@ -4,22 +4,29 @@ import com.ccc.outside.Xia;
 import com.ciel.entity.UserEntity;
 import com.ciel.service.UserService;
 import com.ciel.springcloudasso.service.GetCussLoginUser;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
+@Api(tags = "主页管理")
 @RestController
 @SessionAttributes("/user")
 public class IndexController {
@@ -33,8 +40,23 @@ public class IndexController {
     @Autowired
     private Xia xia;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     Logger logger = LoggerFactory.getLogger(getClass());
 
+    @RequestMapping("/rest")
+    public Map rest(@ModelAttribute("md") Map map2, Model model,@RequestParam(required=false) String hha){
+
+        Map<String, Object> stringObjectMap = model.asMap();
+
+        Map map = new HashMap();
+        map.put("name","xiapeixin");
+        return map;
+    }
+
+    @ApiOperation(value = "登录页面",notes = "必须要登录")
+    @ApiImplicitParam(paramType = "path", dataType = "Long", name = "id", value = "用户编号", required = true, example = "1")
     @RequestMapping("/login")
     public ModelAndView index(HttpServletRequest request){
         String path = request.getServletPath();
@@ -120,22 +142,21 @@ public class IndexController {
     }
 
 
-
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/test2")
-    public String test2(Principal principal, Authentication authentication,HttpServletRequest request) {
-//获取当前登录用户信息; 的三种方式
+    public Map test2(Principal principal, Authentication authentication,HttpServletRequest request) {
+        //获取当前登录用户信息; 的三种方式
         String name = principal.getName();
         String name1 = authentication.getName();
         Principal userPrincipal = request.getUserPrincipal();
-
 
         User o = getCussLoginUser.getloginUser(); //获取当前登录用户
 
         getCussLoginUser.getloginAuthentication();
 
-        return "test2";
+        Map<Object, Object> objectObjectMap = Collections.synchronizedMap(new HashMap<>());
+        objectObjectMap.put("name","xia_pei_xin");
+        return objectObjectMap;
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
@@ -156,7 +177,6 @@ public class IndexController {
     public String aa(){
         return "aaaa";
     }
-
 
     @PreAuthorize("hasIpAddress('127.0.0.1')")
     @RequestMapping("/test8")

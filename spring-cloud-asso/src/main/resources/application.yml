@@ -70,6 +70,21 @@ spring:
     host: smtp.163.com
   aop:
     proxy-target-class: true #使用cglib代理
+
+swagger:
+  title: spring-boot-starter-swagger
+  description: Starter for swagger 2.x
+  version: 1.4.0.RELEASE
+  license: Apache License, Version 2.0
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfServiceUrl: https://github.com/dyc87112/spring-boot-starter-swagger
+  contact.name: didi
+  contact.url: http://blog.didispace.com
+  contact.email: 15966504931@163.com
+  base-package: com.ciel
+  base-path: /**
+
+
 ---
 spring:
   profiles: dev #dev模式

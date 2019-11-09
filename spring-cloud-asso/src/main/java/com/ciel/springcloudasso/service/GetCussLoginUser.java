@@ -15,8 +15,7 @@ import java.util.concurrent.Future;
 @Service
 public class GetCussLoginUser {
 
-    public Authentication getloginAuthentication(){
-
+    public Authentication getloginAuthentication(){  //获取当前登录用户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -27,8 +26,7 @@ public class GetCussLoginUser {
 
     }
 
-
-    public User getloginUser(){
+    public User getloginUser(){ //获取当前登录用户
         UsernamePasswordAuthenticationToken authenticationToken
                 = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         //details里面可能存放了当前登录用户的详细信息，也可以通过cast后拿到

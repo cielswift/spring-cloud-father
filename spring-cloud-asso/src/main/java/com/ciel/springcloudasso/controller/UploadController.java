@@ -2,12 +2,10 @@ package com.ciel.springcloudasso.controller;
 
 import com.ciel.springcloudasso.service.GetCussLoginUser;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.util.concurrent.FailureCallback;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -21,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -35,12 +35,12 @@ public class UploadController {
     private String imgUserRequest;
 
     @PostMapping(value = "/upload")
-    public String upload(@RequestParam("file") MultipartFile file,@RequestParam("anchor") String anchor) throws JSONException {
+    public Map upload(@RequestParam("file") MultipartFile file, @RequestParam("anchor") String anchor) throws JSONException {
 
         //获取用户,获取anchor, 判断是否已有图片,有替换,避免垃圾数据;
 
 
-        JSONObject back = new JSONObject();
+        Map back = new HashMap();
         try {
 
             String lastName = "";
@@ -74,7 +74,8 @@ public class UploadController {
 
         }
 
-        return StringEscapeUtils.unescapeJava(back.toString());
+        return back;
+      //  return StringEscapeUtils.unescapeJava(back.toString());
 
     }
 

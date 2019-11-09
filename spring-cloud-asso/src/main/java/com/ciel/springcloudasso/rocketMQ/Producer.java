@@ -23,8 +23,6 @@ public class Producer {
             for (int i = 0; i < 100; i++) {
 
                 MsgUser user = new MsgUser("xiapeixin".concat(String.valueOf(i)),"123");
-
-
                 Message message =
                         new Message("log-topic", "user-tag",
                                 "key".concat(String.valueOf(i)),JSON.toJSONString(user).getBytes());
@@ -32,12 +30,9 @@ public class Producer {
                         //主题,标签(消息过滤),消息唯一值, 消息体
 
                 System.out.println("生产者发送消息:" + JSON.toJSONString(user));
-
                 SendResult send = producer.send(message);
-
                 System.out.println(send);
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

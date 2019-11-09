@@ -1,16 +1,18 @@
 package com.ciel.springcloudasso.interceptor;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.FormContentFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 //@EnableWebMvc
 public class WebTheMvcConfig implements WebMvcConfigurer {
 
-//    @Bean
-//    public FormContentFilter formContentFilter() { //注册rest风格url
-//        return new FormContentFilter();
-//    }
+    @Bean
+    public FormContentFilter formContentFilter() { //注册rest风格url
+        return new FormContentFilter();
+    }
 //
 //    @Override //手动添加一个controller
 //    public void addViewControllers(ViewControllerRegistry registry) {

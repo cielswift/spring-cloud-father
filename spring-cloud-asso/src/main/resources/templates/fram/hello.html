@@ -14,7 +14,6 @@
 权限和角色: <span sec:authentication="authorities"></span><br>
 客户端ip: <span sec:authentication="details.remoteAddress"></span><br>
 
-
 <!--name：登录账号名称-->
 <!-- principal：登录主体，在自定义登录逻辑中是UserDetails-->
 <!-- credentials：凭证-->
@@ -23,16 +22,16 @@
 
 <table class="table">
     通过权限判断
-    <button class="btn-warning" sec:authorize="hasAuthority('ADMIN')">新增</button>
-    <button class="btn-warning" sec:authorize="hasAnyAuthority('ADMIN','USER')">删除</button>
+    <button class="btn btn-warning" sec:authorize="hasAuthority('ADMIN')">新增</button>
+    <button class="btn btn-warning" sec:authorize="hasAnyAuthority('ADMIN','USER')">删除</button>
     <br/>
     通过角色判断：
-    <button class="btn-warning" sec:authorize="hasRole('ROLE_BOSS')">修改</button>
-    <button class="btn-warning" sec:authorize="hasAnyRole('ROLE_BOSS','ROLE_EMP')">查看</button>
+    <button class="btn btn-warning" sec:authorize="hasRole('ROLE_BOSS')">修改</button>
+    <button class="btn btn-warning" sec:authorize="hasAnyRole('ROLE_BOSS','ROLE_EMP')">查看</button>
     自定义判断
-    <button class="btn-warning" sec:authorize="@myServiceImpl.hasPermission(request,authentication)">自定义</button>
+    <button class="btn btn-warning" sec:authorize="@myServiceImpl.hasPermission(request,authentication)">自定义</button>
     ip判断
-    <button class="btn-warning" sec:authorize="hasIpAddress('127.0.0.1')">ip</button>
+    <button class="btn btn-warning" sec:authorize="hasIpAddress('127.0.0.1')">ip</button>
 
 </table>
 
@@ -88,16 +87,16 @@
             processData: false,
             success: function (data) {
 
-                if (data.status == "success") {
+                if (data.resultBody.status == "success") {
 
-                    if(data.url.toString().indexOf(".png") == -1){
+                    if(data.resultBody.url.toString().indexOf(".png") == -1){
 
                         let dow = $("<a>download</a>").attr("href",data.url);
 
                         $("#dow").append(dow);
 
                     }else{
-                        $("#img").attr("src", data.url);
+                        $("#img").attr("src", data.resultBody.url);
                     }
 
 

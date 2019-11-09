@@ -29,4 +29,5 @@ public class SpringCloudProviderApplication {
         SpringApplication.run(SpringCloudProviderApplication.class, args);
     }
 
+
 }

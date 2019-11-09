@@ -16,6 +16,7 @@ public class SpringCloudZuulApplication {
         SpringApplication.run(SpringCloudZuulApplication.class, args);
     }
 
+
 }
 //http://10.0.75.1:8089/zuul/springcloud-consumer0/consumer0/search/ap
 //http://10.0.75.1:8089/zuul/application/dev
