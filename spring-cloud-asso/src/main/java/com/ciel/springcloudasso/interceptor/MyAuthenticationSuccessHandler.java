@@ -43,7 +43,9 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
 		redisTemplate.opsForValue().set(System.currentTimeMillis(),user_info,1, TimeUnit.MINUTES);
 
-		response.sendRedirect("/asso/hello");
+		String callback = request.getParameter("callback");
+
+		response.sendRedirect(callback);
 
 	}
 

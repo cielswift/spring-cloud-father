@@ -30,6 +30,7 @@ public class MyUserDetailService implements UserDetailsService {
             List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
 
             roles.forEach(t -> authorities.add(new SimpleGrantedAuthority(t.getName())));
+
             authorities.add(new SimpleGrantedAuthority("ROLE_BOSS"));
             //List<GrantedAuthority> admin = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
 

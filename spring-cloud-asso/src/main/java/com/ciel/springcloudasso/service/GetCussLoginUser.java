@@ -3,6 +3,7 @@ package com.ciel.springcloudasso.service;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,13 +28,18 @@ public class GetCussLoginUser {
     }
 
     public User getloginUser(){ //获取当前登录用户
-        UsernamePasswordAuthenticationToken authenticationToken
-                = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication instanceof UsernamePasswordAuthenticationToken){
+
+        }else if(authentication instanceof RememberMeAuthenticationToken){
+
+        }
         //details里面可能存放了当前登录用户的详细信息，也可以通过cast后拿到
-        User userDetails = (User) authenticationToken.getPrincipal();
+        User userDetails = (User) authentication.getPrincipal();
 
         return userDetails;
-
     }
 
 //    Authentication在认证请求时用到，也可在层次间传递。最常见的场景就是登录，登录中的name、password、permission，

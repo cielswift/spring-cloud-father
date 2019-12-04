@@ -13,6 +13,16 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_12">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -28,7 +38,6 @@
     <orderEntry type="module" module-name="spring-cloud-entity" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-jwt:1.0.11.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.64" level="project" />
-    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.64" level="project" />
     <orderEntry type="library" name="Maven: com.spring4all:swagger-spring-boot-starter:1.9.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:2.9.2" level="project" />
@@ -48,7 +57,6 @@
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-client:4.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-common:4.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-remoting:4.5.2" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.51" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.39.Final" level="project" />
     <orderEntry type="library" name="Maven: org.apache.rocketmq:rocketmq-logging:4.5.2" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-tcnative-boringssl-static:2.0.25.Final" level="project" />
@@ -58,6 +66,10 @@
     <orderEntry type="library" name="Maven: cn.hutool:hutool-core:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: cn.hutool:hutool-http:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: cn.hutool:hutool-json:5.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alipay.sdk:alipay-sdk-java:4.8.10.ALL" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.50" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.62" level="project" />
     <orderEntry type="library" name="Maven: io.jsonwebtoken:jjwt:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: com.auth0:java-jwt:3.8.3" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />

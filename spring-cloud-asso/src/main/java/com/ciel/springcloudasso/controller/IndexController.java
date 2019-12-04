@@ -159,6 +159,11 @@ public class IndexController {
         return objectObjectMap;
     }
 
+//    @RolesAllowed({"USER","ADMIN"})该方法只要具有“USER","ADMIN"任意一种权限就可以访问。" +
+//            "这里可以省略前缀ROLE_，实际的权限可能是ROLE_ADMIN
+//    @PermitAll允许所有访问
+//   @DenyAll 拒绝所有访问
+
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @RequestMapping("/test6")
     public String test6() {
@@ -183,6 +188,24 @@ public class IndexController {
     public String test8() {
         return "test8";
     }
+
+
+//    hasRole([role])	当前账户有指定角色时返回true, 默认情况下，角色都是以ROLE_开头，当然也可以在修改DefaultWebSecurityExpressionHandler中修改defaultRolePrefix自定义角色前缀
+//* hasAnyRole([role1,role2])	当前账户有指定角色中的任意一个时返回true, 默认情况下，角色都是以ROLE_开头，当然也可以在修改DefaultWebSecurityExpressionHandler中修改defaultRolePrefix自定义角色前缀
+//    hasAuthority([authority])	当前账户有指定权限时返回true
+//    hasAnyAuthority([authority1,authority2])	当前账户有指定权限中任何一个时返回true
+//    principal	允许当前用户直接访问的对象主体
+//    authentication	允许直接访问从SecurityContext获得的当前身份验证对象
+//    permitAll	允许所有
+//    denyAll	拒绝所有
+//    isAnonymous()	是否匿名用户
+//    isRememberMe()	当前是否被记住
+//* isAuthenticated()	是否已经登录
+//    isFullyAuthenticated()	是否已经登录 或 被记住
+//* hasPermission(Object target, Object permission)	Returns true if the user has access to the provided target for the given permission. For example, hasPermission(domainObject, ‘read’)
+//            * hasPermission(Object targetId, String targetType, Object permission)	Returns true if the user has access to the provided target for the given permission. For example, hasPermission(1, ‘com.example.domain.Message’, ‘read’)
+//    hasIpAddress([ip address])	IP地址是否是？？？
+
 
     @RequestMapping("/boot")
     public ModelAndView boot(){

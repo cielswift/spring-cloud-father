@@ -59,6 +59,12 @@
             <version>2.3.0</version>
         </dependency>
 
+        <dependency> <!--支付-->
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.8.10.ALL</version>
+        </dependency>
+
         <dependency> <!--jwt-->
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>

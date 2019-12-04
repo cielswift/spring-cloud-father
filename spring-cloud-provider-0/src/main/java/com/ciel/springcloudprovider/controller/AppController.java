@@ -3,9 +3,6 @@ package com.ciel.springcloudprovider.controller;
 import com.ciel.entity.AppEntity;
 import com.ciel.service.AppService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -87,8 +84,6 @@ public class AppController {
 
         return StringEscapeUtils.unescapeJava(jsonpObject.toString());
     }
-
-
 
     @RequestMapping("/fuck")
     public String fuck(){

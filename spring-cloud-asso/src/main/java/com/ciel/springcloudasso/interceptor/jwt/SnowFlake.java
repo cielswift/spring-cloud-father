@@ -97,7 +97,8 @@ public class SnowFlake {
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
-
+            long l = snowFlake.nextId();
+            System.out.println(l);
         }
 
         System.out.println(System.currentTimeMillis() - start);

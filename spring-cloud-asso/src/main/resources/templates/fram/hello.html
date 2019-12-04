@@ -68,7 +68,6 @@
 <script>
 
     $("#file_up").change(function () {
-
         let formdata = new FormData();
         formdata.append('file', $('#file_up').get(0).files[0]);
         formdata.append("anchor","head");
@@ -98,10 +97,7 @@
                     }else{
                         $("#img").attr("src", data.resultBody.url);
                     }
-
-
                 }
-
             },
             error: function (err) {
                 console.log(err)
@@ -115,6 +111,9 @@
 
     }
 
+
+
+    loca
 
 </script>
 </html>

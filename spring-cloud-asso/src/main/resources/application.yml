@@ -34,6 +34,7 @@ spring:
       content-type: text/html
   profiles:
     active: dev #激活dev模式
+    include: ras
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql.ciel.cl:1601/ssh-data?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai

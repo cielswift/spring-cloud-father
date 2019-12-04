@@ -1,4 +1,0 @@
-mycustomconfig:
-  name: 夏培鑫${random.uuid}
-  age: 22
-  sex: true

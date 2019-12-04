@@ -16,7 +16,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
     /**
      * 自定义验证方式
      */

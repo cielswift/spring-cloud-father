@@ -1,5 +1,6 @@
 package com.ciel.springcloudasso.interceptor;
 
+import com.ciel.springcloudasso.interceptor.jwt.Ras;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @EnableWebSecurity //使配置生效
@@ -27,6 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //当进行登录时会执行 UsernamePasswordAuthenticationFilter 过滤器。
     //然后 BasicAuthenticationFilter, 不配置不生效
     //然后 FilterSecurityInterceptor ,判断权限,没有会给ExceptionTranslationFilter 抛异常
+
+    // Authentication在认证请求时用到，也可在层次间传递。最常见的场景就是登录，登录中的name、password、permission，
+    //  对于过来就是Authentication的Principal、Credentials、Authorities。
 
     @Autowired
     private MyAccessDeniedHandler myAccessDeniedHandler; //自定义403页面
@@ -52,24 +57,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler; //自定义成功处理器
 
+    @Autowired
+    private Ras ras; //公钥私钥
+
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    public void configure(AuthenticationManagerBuilder auth) throws Exception { //认证用户的来源
 
         auth.authenticationProvider(authenticationProvider);
 
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService); //数据库认证
 
+//        auth.inMemoryAuthentication().withUser("xiapeixin") //内存验证
+//                .password("$2a$10$1xFidAcDhQAvDTYylcs1Tep4PHCaMoAWo.9nKs4oHNiQPgLDNnyYC")
+//                .authorities(new SimpleGrantedAuthority("ADMIN"),new SimpleGrantedAuthority("uSER"));
     }
 
-    // Authentication在认证请求时用到，也可在层次间传递。最常见的场景就是登录，登录中的name、password、permission，
-    //  对于过来就是Authentication的Principal、Credentials、Authorities。
-
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception { //配置
 
         //http.addFilter(); //手动添加一个过滤器 ,(必须是spring提供的过滤器)
         // 如果我们创建的Filter没有在预先设置的Map集合中，那么就会抛出一个IllegalArgumentException异常，
         // 并提示我们使用addFilterBefore或者addFilterAfter
+
+        http.addFilterAt(new JWTLoginFilter(super.authenticationManager(),ras), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(new JWTAuthenticationFilter(super.authenticationManager(),ras));
+        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //禁用session;
+
 
         //表单认证
         http.formLogin()  // 设置表单登录，创建UsernamePasswordAuthenticationFilter拦截器 (FormLoginConfigurer)
